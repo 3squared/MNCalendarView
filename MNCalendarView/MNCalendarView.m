@@ -43,6 +43,7 @@
   self.toDate     = [self.fromDate dateByAddingTimeInterval:MN_YEAR * 4];
   self.selectedDates = [[NSMutableSet alloc] init];
   self.daysInWeek = 7;
+  self.isReadOnly = NO;
   
   self.headerViewClass  = MNCalendarHeaderView.class;
   self.weekdayCellClass = MNCalendarViewWeekdayCell.class;
@@ -221,6 +222,66 @@
   return enabled;
 }
 
+- (NSIndexPath *)indexPathForDate:(NSDate *)date
+{
+    if ([date compare:_fromDate] == NSOrderedAscending || [date compare:_toDate] == NSOrderedDescending) {
+        return nil;
+    }
+    NSDateComponents *toDateComp      = [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:date];
+    NSDateComponents *initialDateComp = [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:_fromDate];
+    
+    NSInteger yearDiff  = [toDateComp year] - [initialDateComp year];
+    NSInteger monthDiff = fabs([toDateComp month] - [initialDateComp month]);
+    NSInteger dayDiff   = [toDateComp day];
+    
+    [toDateComp setDay:1];
+    toDateComp = [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit) fromDate:[self.calendar dateFromComponents:toDateComp]];
+    
+    NSInteger section = (yearDiff * 12) + monthDiff;
+    NSInteger row = [toDateComp weekday] - 1 + dayDiff - 1 + self.daysInWeek;
+    
+    return [NSIndexPath indexPathForItem:row inSection:section];
+}
+
+/*
+ Should be called at - (void)viewDidLayoutSubviews
+ if you want to scroll at the begining.
+ */
+- (void)scrollToDate:(NSDate *)date animated:(BOOL)animated
+{
+    NSIndexPath *indexPath = [self indexPathForDate:date];
+    if (!indexPath) {
+        return;
+    }
+    [self.collectionView scrollToItemAtIndexPath:indexPath
+                                atScrollPosition:UICollectionViewScrollPositionCenteredVertically
+                                        animated:animated];
+}
+
+/*
+ Should be called at - (void)viewDidLayoutSubviews
+ if you want to scroll at the begining.
+ */
+- (void)scrollToDate:(NSDate *)date
+{
+    [self scrollToDate:date animated:YES];
+}
+
+/*
+ Should be called at - (void)viewDidLayoutSubviews
+ if you want to scroll at the begining.
+ */
+- (void)selectDate:(NSDate *)date animated:(BOOL)animated
+{
+    NSIndexPath *indexPath = [self indexPathForDate:date];
+    if (!indexPath) {
+        return;
+    }
+    [self.collectionView selectItemAtIndexPath:indexPath
+                                      animated:animated
+                                scrollPosition:UICollectionViewScrollPositionCenteredVertically];
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -313,6 +374,10 @@
   } else if (_selectedDate && cell.enabled) {
     [cell setSelected:[date isEqualToDate:self.selectedDate]];
   }
+    
+    if (_isReadOnly) {
+        cell.userInteractionEnabled = NO;
+    }
   
   return cell;
 }

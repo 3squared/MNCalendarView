@@ -30,12 +30,17 @@
 @property(nonatomic) BOOL shouldMultipleSelect;
 @property(nonatomic) BOOL displaysDaysOfOtherMonths;
 @property(nonatomic, getter = isHiddenTodayIndicator) BOOL hiddenTodayIndicator;
+@property(nonatomic) BOOL isReadOnly;
 
 @property(nonatomic,strong) UIColor *separatorColor UI_APPEARANCE_SELECTOR; // default is the standard separator gray
 
 @property(nonatomic,strong) Class headerViewClass;
 @property(nonatomic,strong) Class weekdayCellClass;
 @property(nonatomic,strong) Class dayCellClass;
+
+- (void)scrollToDate:(NSDate *)date;
+- (void)scrollToDate:(NSDate *)date animated:(BOOL)animated;
+- (void)selectDate:(NSDate *)date animated:(BOOL)animated;
 
 - (void)reloadData;
 - (void)registerUICollectionViewClasses; 
