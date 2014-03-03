@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MNCalendarView"
-  s.version      = "1.0"
+  s.version      = "1.1.0"
   s.summary      = "Highly customizable calendar view for iOS apps."
   s.homepage     = "https://github.com/min/MNCalendarView"
   s.screenshots  = "https://github.com/min/MNCalendarView/raw/master/Documentation/Default@2x.png"
