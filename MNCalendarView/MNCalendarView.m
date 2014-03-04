@@ -410,8 +410,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(calendarView:didSelectDate:)]) {
       [self.delegate calendarView:self didSelectDate:dayCell.date];
     }
-    
-    [self.collectionView reloadData];
   }
 }
 
