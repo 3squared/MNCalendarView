@@ -346,16 +346,6 @@
   [cell setDate:date
           month:monthDate
        calendar:self.calendar];
-  
-  if (_hiddenTodayIndicator == NO) {
-    NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:date];
-    if (0 < interval && interval < MN_DAY) {
-      NSDictionary *stringAttributes = @{NSUnderlineStyleAttributeName: [NSNumber numberWithBool:YES]};
-      NSAttributedString *decoratedString = [[NSAttributedString alloc] initWithString:cell.titleLabel.text
-                                                                            attributes:stringAttributes];
-      cell.titleLabel.attributedText = decoratedString;
-    }
-  }
 
   if (cell.enabled) {
     [cell setEnabled:[self dateEnabled:date]];
