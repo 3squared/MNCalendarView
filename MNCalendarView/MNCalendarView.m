@@ -20,7 +20,6 @@
 @property(nonatomic,strong,readwrite) UICollectionViewFlowLayout *layout;
 
 @property(nonatomic,strong,readwrite) NSArray *monthDates;
-@property(nonatomic,strong,readwrite) NSArray *weekdaySymbols;
 @property(nonatomic,assign,readwrite) NSUInteger daysInWeek;
 
 @property(nonatomic,strong,readwrite) NSDateFormatter *monthFormatter;
@@ -127,11 +126,6 @@
   }
   self.monthDates = monthDates;
   
-  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-  formatter.calendar = self.calendar;
-  
-  self.weekdaySymbols = formatter.shortWeekdaySymbols;
-  
   [self.collectionView reloadData];
 }
 
@@ -145,6 +139,13 @@
   [_collectionView registerClass:self.headerViewClass
       forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
              withReuseIdentifier:MNCalendarHeaderViewIdentifier];
+}
+
+- (NSArray *)weekdaySymbols {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.calendar = self.calendar;
+	
+	return formatter.shortWeekdaySymbols;
 }
 
 - (NSDate *)firstVisibleDateOfMonth:(NSDate *)date {
