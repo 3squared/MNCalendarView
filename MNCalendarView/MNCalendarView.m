@@ -369,6 +369,11 @@
     if (_isReadOnly) {
         cell.userInteractionEnabled = NO;
     }
+	
+	if(self.delegate && [self.delegate respondsToSelector:@selector(calendarView:configureCell:forDate:)])
+	{
+		[self.delegate calendarView:self configureCell:cell forDate:date];
+	}
   
   return cell;
 }

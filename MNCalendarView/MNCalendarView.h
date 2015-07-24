@@ -53,5 +53,6 @@
 
 - (BOOL)calendarView:(MNCalendarView *)calendarView shouldSelectDate:(NSDate *)date;
 - (void)calendarView:(MNCalendarView *)calendarView didSelectDate:(NSDate *)date;
+- (void)calendarView:(MNCalendarView *)calendarView configureCell:(UICollectionViewCell *)cell forDate:(NSDate *)date;
 
 @end
