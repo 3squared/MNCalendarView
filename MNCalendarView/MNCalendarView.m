@@ -415,7 +415,7 @@
   
   CGFloat width      = self.bounds.size.width;
   CGFloat itemWidth  = roundf(width / self.daysInWeek);
-  CGFloat itemHeight = indexPath.item < self.daysInWeek ? 30.f : itemWidth;
+  CGFloat itemHeight = indexPath.item < self.daysInWeek ? 30.f : (itemWidth * 1.5);
   
   NSUInteger weekday = indexPath.item % self.daysInWeek;
   
