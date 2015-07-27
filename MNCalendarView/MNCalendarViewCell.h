@@ -20,4 +20,12 @@ CG_EXTERN void MNContextDrawLine(CGContextRef c, CGPoint start, CGPoint end, CGC
 
 @property(nonatomic,strong,readonly) UILabel *titleLabel;
 
+@property (nonatomic, strong) UIColor *enabledBackgroundColor;
+@property (nonatomic, strong) UIColor *disabledBackgroundColor;
+
+@property (nonatomic, strong) UIColor *enabledTitleLabelTextColor;
+@property (nonatomic, strong) UIColor *disabledTitleLabelTextColor;
+
+@property (nonatomic, strong) UIColor *currentDateCellBackgroundColor;
+
 @end

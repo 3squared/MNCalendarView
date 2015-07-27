@@ -22,35 +22,30 @@ NSString *const MNCalendarViewDayCellIdentifier = @"MNCalendarViewDayCellIdentif
 
 - (void)setDate:(NSDate *)date
           month:(NSDate *)month
-       calendar:(NSCalendar *)calendar {
+       calendar:(NSCalendar *)calendar
+{
+	self.date     = date;
+	self.month    = month;
+	self.calendar = calendar;
   
-  self.date     = date;
-  self.month    = month;
-  self.calendar = calendar;
+	NSDateComponents *components = [self.calendar components:NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit fromDate:self.date];
   
-  NSDateComponents *components =
-  [self.calendar components:NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit
-                   fromDate:self.date];
+	NSDateComponents *monthComponents = [self.calendar components:NSMonthCalendarUnit fromDate:self.month];
   
-  NSDateComponents *monthComponents =
-  [self.calendar components:NSMonthCalendarUnit
-                   fromDate:self.month];
+	self.weekday = components.weekday;
+	self.titleLabel.text = [NSString stringWithFormat:@"%d", components.day];
+	self.enabled = monthComponents.month == components.month;
   
-  self.weekday = components.weekday;
-  self.titleLabel.text = [NSString stringWithFormat:@"%d", components.day];
-  self.enabled = monthComponents.month == components.month;
-  
-  [self setNeedsDisplay];
+	[self setNeedsDisplay];
 }
 
-- (void)setEnabled:(BOOL)enabled {
-  [super setEnabled:enabled];
-  
-  self.titleLabel.textColor =
-  self.enabled ? UIColor.darkTextColor : UIColor.lightGrayColor;
-  
-  self.backgroundColor =
-  self.enabled ? UIColor.whiteColor : [UIColor colorWithRed:.96f green:.96f blue:.96f alpha:1.f];
+- (void)setEnabled:(BOOL)enabled
+{
+	[super setEnabled:enabled];
+	
+	self.titleLabel.textColor = (self.enabled ? self.enabledTitleLabelTextColor : self.disabledTitleLabelTextColor);
+	
+	self.backgroundColor = (self.enabled ? self.enabledBackgroundColor : self.disabledBackgroundColor);
 }
 
 - (void)setVisible:(BOOL)visible {

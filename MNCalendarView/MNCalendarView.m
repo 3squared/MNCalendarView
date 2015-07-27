@@ -388,25 +388,35 @@
   return [self canSelectItemAtIndexPath:indexPath];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-  MNCalendarViewCell *cell = (MNCalendarViewCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
+	
+	MNCalendarViewCell *cell = (MNCalendarViewCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
 
-  if ([cell isKindOfClass:MNCalendarViewDayCell.class] && cell.enabled) {
-    MNCalendarViewDayCell *dayCell = (MNCalendarViewDayCell *)cell;
-    
-    if (_shouldMultipleSelect) {
-      if ([self.selectedDates containsObject:dayCell.date]) {
-        [self.selectedDates removeObject:dayCell.date];
-      } else {
-        [self.selectedDates addObject:dayCell.date];
-      }
-    }
-    self.selectedDate = dayCell.date;
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(calendarView:didSelectDate:)]) {
-      [self.delegate calendarView:self didSelectDate:dayCell.date];
-    }
-  }
+	if ([cell isKindOfClass:MNCalendarViewDayCell.class] && cell.enabled)
+	{
+		MNCalendarViewDayCell *dayCell = (MNCalendarViewDayCell *)cell;
+
+		if (_shouldMultipleSelect)
+		{
+			if ([self.selectedDates containsObject:dayCell.date])
+			{
+				[self.selectedDates removeObject:dayCell.date];
+			}
+			else
+			{
+				[self.selectedDates addObject:dayCell.date];
+			}
+		}
+
+		self.selectedDate = dayCell.date;
+
+		if (self.delegate && [self.delegate respondsToSelector:@selector(calendarView:didSelectDate:)])
+		{
+			[self.delegate calendarView:self didSelectDate:dayCell.date];
+		}
+	}
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView

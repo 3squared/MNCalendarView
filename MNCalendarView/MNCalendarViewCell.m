@@ -28,26 +28,39 @@ NSString *const MNCalendarViewCellIdentifier = @"MNCalendarViewCellIdentifier";
 
 @implementation MNCalendarViewCell
 
-- (id)initWithFrame:(CGRect)frame {
-  if (self = [super initWithFrame:frame]) {
-    self.backgroundColor = UIColor.whiteColor;
-    self.contentView.backgroundColor = UIColor.clearColor;
-    
-    self.titleLabel = [[UILabel alloc] initWithFrame:self.bounds];
-    self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    self.titleLabel.font = [UIFont systemFontOfSize:14.f];
-    self.titleLabel.textColor = [UIColor darkTextColor];
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.userInteractionEnabled = NO;
-    self.titleLabel.backgroundColor = [UIColor clearColor];
-    
-    [self.contentView addSubview:self.titleLabel];
-    
-    self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
-    self.selectedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:0.23f green:0.61f blue:1.f alpha:1.f];
-  }
-  return self;
+- (id)initWithFrame:(CGRect)frame
+{
+	self = [super initWithFrame:frame];
+	
+	if (self)
+	{
+		self.backgroundColor = UIColor.whiteColor;
+		self.contentView.backgroundColor = UIColor.clearColor;
+
+		self.titleLabel = [[UILabel alloc] initWithFrame:self.bounds];
+		self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+		self.titleLabel.font = [UIFont systemFontOfSize:14.f];
+		self.titleLabel.textColor = [UIColor darkTextColor];
+		self.titleLabel.textAlignment = NSTextAlignmentCenter;
+		self.titleLabel.userInteractionEnabled = NO;
+		self.titleLabel.backgroundColor = [UIColor clearColor];
+
+		[self.contentView addSubview:self.titleLabel];
+
+		self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
+		self.selectedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+		self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:0.23f green:0.61f blue:1.f alpha:1.f];
+
+		self.enabledBackgroundColor = [UIColor whiteColor];
+		self.disabledBackgroundColor = [UIColor lightGrayColor];
+
+		self.enabledTitleLabelTextColor = [UIColor darkTextColor];
+		self.disabledTitleLabelTextColor = [UIColor lightTextColor];
+		
+		self.currentDateCellBackgroundColor = [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1];
+	}
+	
+	return self;
 }
 
 - (void)layoutSubviews {
