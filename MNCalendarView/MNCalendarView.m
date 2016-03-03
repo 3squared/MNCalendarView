@@ -257,7 +257,7 @@
     NSDateComponents *initialDateComp = [self.calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:_fromDate];
 
     NSInteger yearDiff = [toDateComp year] - [initialDateComp year];
-    NSInteger monthDiff = fabs([toDateComp month] - [initialDateComp month]);
+    NSInteger monthDiff = abs([toDateComp month] - [initialDateComp month]);
     NSInteger dayDiff = [toDateComp day];
 
     [toDateComp setDay:1];
