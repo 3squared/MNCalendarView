@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MNFastDateEnumeration : NSObject<NSFastEnumeration>
+@interface MNFastDateEnumeration : NSObject <NSFastEnumeration>
 
-@property(nonatomic,strong,readonly) NSCalendar *calendar;
-@property(nonatomic,strong,readonly) NSDate     *fromDate;
-@property(nonatomic,strong,readonly) NSDate     *toDate;
+@property (nonatomic, strong, readonly) NSCalendar *calendar;
+@property (nonatomic, strong, readonly) NSDate *fromDate;
+@property (nonatomic, strong, readonly) NSDate *toDate;
 
-@property(nonatomic,assign,readonly) NSCalendarUnit unit;
+@property (nonatomic, assign, readonly) NSCalendarUnit unit;
 
 - (instancetype)initWithFromDate:(NSDate *)fromDate
                           toDate:(NSDate *)toDate
