@@ -8,21 +8,22 @@
 
 #import "MNCalendarViewCell.h"
 
-void MNContextDrawLine(CGContextRef c, CGPoint start, CGPoint end, CGColorRef color, CGFloat lineWidth) {
-  CGContextSetAllowsAntialiasing(c, false);
-  CGContextSetStrokeColorWithColor(c, color);
-  CGContextSetLineWidth(c, lineWidth);
-  CGContextMoveToPoint(c, start.x, start.y - (lineWidth/2.f));
-  CGContextAddLineToPoint(c, end.x, end.y - (lineWidth/2.f));
-  CGContextStrokePath(c);
-  CGContextSetAllowsAntialiasing(c, true);
+void MNContextDrawLine(CGContextRef c, CGPoint start, CGPoint end, CGColorRef color, CGFloat lineWidth)
+{
+    CGContextSetAllowsAntialiasing(c, false);
+    CGContextSetStrokeColorWithColor(c, color);
+    CGContextSetLineWidth(c, lineWidth);
+    CGContextMoveToPoint(c, start.x, start.y - (lineWidth / 2.f));
+    CGContextAddLineToPoint(c, end.x, end.y - (lineWidth / 2.f));
+    CGContextStrokePath(c);
+    CGContextSetAllowsAntialiasing(c, true);
 }
 
 NSString *const MNCalendarViewCellIdentifier = @"MNCalendarViewCellIdentifier";
 
-@interface MNCalendarViewCell()
+@interface MNCalendarViewCell ()
 
-@property(nonatomic,strong,readwrite) UILabel *titleLabel;
+@property (nonatomic, strong, readwrite) UILabel *titleLabel;
 
 @end
 
@@ -30,57 +31,59 @@ NSString *const MNCalendarViewCellIdentifier = @"MNCalendarViewCellIdentifier";
 
 - (id)initWithFrame:(CGRect)frame
 {
-	self = [super initWithFrame:frame];
-	
-	if (self)
-	{
-		self.backgroundColor = UIColor.whiteColor;
-		self.contentView.backgroundColor = UIColor.clearColor;
+    self = [super initWithFrame:frame];
 
-		self.titleLabel = [[UILabel alloc] initWithFrame:self.bounds];
-		self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-		self.titleLabel.font = [UIFont systemFontOfSize:14.f];
-		self.titleLabel.textColor = [UIColor darkTextColor];
-		self.titleLabel.textAlignment = NSTextAlignmentCenter;
-		self.titleLabel.userInteractionEnabled = NO;
-		self.titleLabel.backgroundColor = [UIColor clearColor];
+    if (self)
+    {
+        self.backgroundColor = UIColor.whiteColor;
+        self.contentView.backgroundColor = UIColor.clearColor;
 
-		[self.contentView addSubview:self.titleLabel];
+        self.titleLabel = [[UILabel alloc] initWithFrame:self.bounds];
+        self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.titleLabel.font = [UIFont systemFontOfSize:14.f];
+        self.titleLabel.textColor = [UIColor darkTextColor];
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.titleLabel.userInteractionEnabled = NO;
+        self.titleLabel.backgroundColor = [UIColor clearColor];
 
-		self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
-		self.selectedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-		self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:0.23f green:0.61f blue:1.f alpha:1.f];
+        [self.contentView addSubview:self.titleLabel];
 
-		self.enabledBackgroundColor = [UIColor whiteColor];
-		self.disabledBackgroundColor = [UIColor lightGrayColor];
+        self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
+        self.selectedBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:0.23f green:0.61f blue:1.f alpha:1.f];
 
-		self.enabledTitleLabelTextColor = [UIColor darkTextColor];
-		self.disabledTitleLabelTextColor = [UIColor lightTextColor];
-		
-		self.currentDateCellBackgroundColor = [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1];
-	}
-	
-	return self;
+        self.enabledBackgroundColor = [UIColor whiteColor];
+        self.disabledBackgroundColor = [UIColor lightGrayColor];
+
+        self.enabledTitleLabelTextColor = [UIColor darkTextColor];
+        self.disabledTitleLabelTextColor = [UIColor lightTextColor];
+
+        self.currentDateCellBackgroundColor = [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1];
+    }
+
+    return self;
 }
 
-- (void)layoutSubviews {
-  [super layoutSubviews];
-  
-  self.contentView.frame = self.bounds;
-  self.selectedBackgroundView.frame = self.bounds;
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+
+    self.contentView.frame = self.bounds;
+    self.selectedBackgroundView.frame = self.bounds;
 }
 
-- (void)drawRect:(CGRect)rect {
-  CGContextRef context = UIGraphicsGetCurrentContext();
-  
-  CGColorRef separatorColor = self.separatorColor.CGColor;
-  
-  CGFloat pixel = 1.f / [UIScreen mainScreen].scale;
-  MNContextDrawLine(context,
-                    CGPointMake(0.f, self.bounds.size.height),
-                    CGPointMake(self.bounds.size.width, self.bounds.size.height),
-                    separatorColor,
-                    pixel);
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    CGColorRef separatorColor = self.separatorColor.CGColor;
+
+    CGFloat pixel = 1.f / [UIScreen mainScreen].scale;
+    MNContextDrawLine(context,
+                      CGPointMake(0.f, self.bounds.size.height),
+                      CGPointMake(self.bounds.size.width, self.bounds.size.height),
+                      separatorColor,
+                      pixel);
 }
 
 @end

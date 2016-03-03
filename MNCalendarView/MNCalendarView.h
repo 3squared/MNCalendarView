@@ -9,41 +9,41 @@
 #import <UIKit/UIKit.h>
 
 #define MN_MINUTE 60.f
-#define MN_HOUR   MN_MINUTE * 60.f
-#define MN_DAY    MN_HOUR * 24.f
-#define MN_WEEK   MN_DAY * 7.f
-#define MN_YEAR   MN_DAY * 365.f
+#define MN_HOUR MN_MINUTE * 60.f
+#define MN_DAY MN_HOUR * 24.f
+#define MN_WEEK MN_DAY * 7.f
+#define MN_YEAR MN_DAY * 365.f
 
 @protocol MNCalendarViewDelegate;
 
 @interface MNCalendarView : UIView <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property(nonatomic,strong,readonly) UICollectionView *collectionView;
+@property (nonatomic, strong, readonly) UICollectionView *collectionView;
 
-@property(nonatomic,assign) id<MNCalendarViewDelegate> delegate;
+@property (nonatomic, assign) id<MNCalendarViewDelegate> delegate;
 
-@property(nonatomic,strong) NSCalendar *calendar;
-@property(nonatomic,copy) NSDate *fromDate;
-@property(nonatomic,copy) NSDate *toDate;
-@property(nonatomic,copy) NSDate *selectedDate;
-@property(nonatomic, strong) NSMutableSet *selectedDates;
-@property(nonatomic) BOOL shouldMultipleSelect;
-@property(nonatomic) BOOL displaysDaysOfOtherMonths;
-@property(nonatomic, getter = isHiddenTodayIndicator) BOOL hiddenTodayIndicator;
-@property(nonatomic) BOOL isReadOnly;
+@property (nonatomic, strong) NSCalendar *calendar;
+@property (nonatomic, copy) NSDate *fromDate;
+@property (nonatomic, copy) NSDate *toDate;
+@property (nonatomic, copy) NSDate *selectedDate;
+@property (nonatomic, strong) NSMutableSet *selectedDates;
+@property (nonatomic) BOOL shouldMultipleSelect;
+@property (nonatomic) BOOL displaysDaysOfOtherMonths;
+@property (nonatomic, getter=isHiddenTodayIndicator) BOOL hiddenTodayIndicator;
+@property (nonatomic) BOOL isReadOnly;
 
-@property(nonatomic,strong) UIColor *separatorColor UI_APPEARANCE_SELECTOR; // default is the standard separator gray
+@property (nonatomic, strong) UIColor *separatorColor UI_APPEARANCE_SELECTOR; // default is the standard separator gray
 
-@property(nonatomic,strong) Class headerViewClass;
-@property(nonatomic,strong) Class weekdayCellClass;
-@property(nonatomic,strong) Class dayCellClass;
+@property (nonatomic, strong) Class headerViewClass;
+@property (nonatomic, strong) Class weekdayCellClass;
+@property (nonatomic, strong) Class dayCellClass;
 
 - (void)scrollToDate:(NSDate *)date;
 - (void)scrollToDate:(NSDate *)date animated:(BOOL)animated;
 - (void)selectDate:(NSDate *)date animated:(BOOL)animated;
 
 - (void)reloadData;
-- (void)registerUICollectionViewClasses; 
+- (void)registerUICollectionViewClasses;
 
 @end
 
