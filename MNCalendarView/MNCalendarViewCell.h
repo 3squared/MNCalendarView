@@ -12,12 +12,20 @@ CG_EXTERN void MNContextDrawLine(CGContextRef c, CGPoint start, CGPoint end, CGC
 
 @interface MNCalendarViewCell : UICollectionViewCell
 
-@property(nonatomic,strong) NSCalendar *calendar;
+@property (nonatomic, strong) NSCalendar *calendar;
 
-@property(nonatomic,assign,getter = isEnabled) BOOL enabled;
+@property (nonatomic, assign, getter=isEnabled) BOOL enabled;
 
-@property(nonatomic,strong) UIColor *separatorColor;
+@property (nonatomic, strong) UIColor *separatorColor;
 
-@property(nonatomic,strong,readonly) UILabel *titleLabel;
+@property (nonatomic, strong, readonly) UILabel *titleLabel;
+
+@property (nonatomic, strong) UIColor *enabledBackgroundColor;
+@property (nonatomic, strong) UIColor *disabledBackgroundColor;
+
+@property (nonatomic, strong) UIColor *enabledTitleLabelTextColor;
+@property (nonatomic, strong) UIColor *disabledTitleLabelTextColor;
+
+@property (nonatomic, strong) UIColor *currentDateCellBackgroundColor;
 
 @end
